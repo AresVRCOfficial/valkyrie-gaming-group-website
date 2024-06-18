@@ -118,3 +118,12 @@ footer {
         transform: translate(-100%, 0);
     }
 }
+
+#calendar {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    color: #fff;
+}
