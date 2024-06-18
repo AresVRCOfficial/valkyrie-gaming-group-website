@@ -1,0 +1,65 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #333;
+}
+
+header {
+    background: linear-gradient(to bottom, #2e2c2c, #6daff1); /* Gradient background */
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+    position: relative; /* Ensure relative positioning for the header */
+}
+
+header::after {
+    content: '';
+    position: absolute;
+    bottom: -5px; /* Adjust to match the height of the line */
+    left: 0;
+    width: 100%;
+    height: 5px; /* Adjust height as needed */
+    background: linear-gradient(to right, #333, #6daff1); /* Dark to light blue gradient */
+}
+
+header h1 {
+    margin: 0;
+    color: #fff; /* Title text color */
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    background: linear-gradient(to bottom, #2e2c2c, #6daff1); /* Gradient background for navigation */
+    margin-top: 10px; /* Example: adjust margin as needed */
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 1rem;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+main {
+    padding: 2rem;
+    margin: 2rem;
+    box-shadow: 0 0 10px rgba(105, 104, 104, 0.1);
+    color: #fff; /* Set text color to white */
+    background-image: url('C:\\Users\\Johna\\OneDrive\\Desktop\\vgg website\\images\\background.jpg'); /* Path to your background image */
+    background-size: cover; /* Ensure the image covers the entire background */
+}
+
+footer {
+    text-align: center;
+    padding: 1rem 0;
+    background: linear-gradient(to bottom, #2e2c2c, #6daff1); /* Fixed gradient syntax */
+    color: #fff;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+} 
