@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - Valkyrie Gaming Group</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="images/logos/favicon.ico">
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css' rel='stylesheet' />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js'></script>
+</head>
+<body>
+    <header>
+        <h1>Valkyrie Gaming Group Events</h1>
+        <div class="marquee-container">
+            <div class="marquee">
+                <p>Check out our upcoming events below!</p>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="valkyrie-vanguard.html">Valkyrie Vanguard</a></li>
+                <li><a href="events.html">Events</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div id='calendar'></div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Valkyrie Gaming Group</p>
+        <div class="social-links">
+            <a href="https://discord.gg/b2yDzgTV9w"><i class="fab fa-discord"></i> Discord</a>
+            <a href="https://vrchat.com/home/group/grp_519758a9-f509-44a1-bf62-99e32bc8faf2"><i class="fab fa-vrchat"></i> VRChat Group</a>
+            <a href="http://www.youtube.com/channel/UC9i0xeoYRGshyhlXwu4KBtA"><i class="fab fa-youtube"></i> YouTube</a>
+            <a href="https://twitter.com/TheTeamValkyrie"><i class="fab fa-twitter"></i> Twitter</a>
+        </div>
+    </footer>
+    <script src="scripts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                events: [
+                    // Predefined events go here
+                    {
+                        title: 'Pirates of the Caribbean Marathon',
+                        start: '2024-06-18T18:30:00',
+                        description: 'Starting with Curse of the Black Pearl!'
+                    },
+                    // Add more events here
+                ],
+                editable: true,
+                selectable: true,
+                selectHelper: true,
+                eventClick: function(info) {
+                    // Edit or delete event
+                    if(confirm("Do you want to remove this event?")) {
+                        info.event.remove();
+                    }
+                },
+                select: function(info) {
+                    var title = prompt('Enter Event Title:');
+                    if (title) {
+                        calendar.addEvent({
+                            title: title,
+                            start: info.startStr,
+                            end: info.endStr,
+                            allDay: info.allDay
+                        });
+                    }
+                    calendar.unselect();
+                }
+            });
+
+            calendar.render();
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+</body>
+</html>
