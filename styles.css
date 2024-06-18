@@ -50,7 +50,7 @@ main {
     margin: 2rem;
     box-shadow: 0 0 10px rgba(105, 104, 104, 0.1);
     color: #fff; /* Set text color to white */
-    background-image: url('images/background.jpg'); /* Path to your background image */
+    background-image: url('https://github.com/AresVRCOfficial/valkyrie-gaming-group-website/blob/main/images/background.jpg'); /* Path to your background image */
     background-size: cover; /* Ensure the image covers the entire background */
 }
 
