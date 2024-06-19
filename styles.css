@@ -172,3 +172,13 @@ footer {
     width: 100%;
     object-fit: cover;
 }
+
+.footer-links {
+    margin-top: 0.5rem;
+}
+
+.footer-links a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 0.5rem;
+}
