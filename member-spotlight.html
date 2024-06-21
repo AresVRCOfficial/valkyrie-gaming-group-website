@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Spotlight | Valkyrie Gaming Group</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <h1>Valkyrie Gaming Group</h1>
+        <nav>
+            <ul id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="pages/valkyrie-vanguard.html">Valkyrie Vanguard</a></li>
+                <li><a href="pages/valkyrie-studios.html">Valkyrie Studios</a></li>
+                <li><a href="pages/valkyrie-gamestudios.html">Valkyrie Game Studios</a></li>
+                <li><a href="pages/sable.html">Sable Bot</a></li>
+                <li><a href="pages/events.html">Events</a></li>
+                <li><a href="pages/staff.html">Meet the Team</a></li>
+                <li><a href="pages/gallery.html">Gallery</a></li>
+                <li><a href="member-spotlight.html">Member Spotlight</a></li>
+                <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                <li><a href="terms-of-service.html">Terms of Service</a></li>
+            </ul>
+            <div class="dropdown-container" id="dropdownContainer">
+                <button class="dropbtn">More</button>
+                <div class="nav-dropdown" id="navDropdown"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Member Spotlight</h2>
+        <div class="spotlight-container">
+            <!-- Spotlight entries will be loaded here from localStorage -->
+        </div>
+
+        <h2>Add New Member Spotlight</h2>
+        <form id="spotlightForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+            <label for="description">Description:</label>
+            <textarea id="description" required></textarea>
+            <label for="imageUrl">Image URL:</label>
+            <input type="text" id="imageUrl" required>
+            <button type="submit">Add Spotlight</button>
+        </form>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <a href="https://discord.gg/b2yDzgTV9w" target="_blank"><i class="fab fa-discord"></i> Discord</a>
+            <a href="https://vrchat.com/home/group/grp_519758a9-f509-44a1-bf62-99e32bc8faf2" target="_blank"><i class="fab fa-vrchat"></i> VRC Group</a>
+            <a href="http://www.youtube.com/channel/UC9i0xeoYRGshyhlXwu4KBtA" target="_blank"><i class="fab fa-youtube"></i> Youtube</a>
+            <a href="https://twitter.com/TheTeamValkyrie" target="_blank"><i class="fab fa-twitter"></i> Twitter/X</a>
+        </div>
+        <div class="footer-links">
+            <a href="privacy-policy.html">Privacy Policy</a> |
+            <a href="terms-of-service.html">Terms of Service</a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load spotlight entries from localStorage
+            loadSpotlights();
+
+            // Form submission handler
+            document.getElementById('spotlightForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const name = document.getElementById('name').value;
+                const description = document.getElementById('description').value;
+                const imageUrl = document.getElementById('imageUrl').value;
+
+                // Add new spotlight
+                addSpotlight(name, description, imageUrl);
+
+                // Post to Discord
+                postToDiscord(name, description, imageUrl);
+            });
+        });
+
+        function postToDiscord(name, description, imageUrl) {
+            const webhookUrl = 'https://discord.com/api/webhooks/1253730021487673515/HPYVlwfhCkcSbZgqwrh5rbw0wqYgx7Pn1vXlbNadc9mvTqpoKy81vfKRgIwYQuDUu4Gv';
+
+            const data = {
+                username: 'Member Spotlight',
+                avatar_url: 'https://cdn.discordapp.com/attachments/1231434578447695962/1234997198979076207/f1767f21-f8bb-4196-907d-2404c55d1f48.jpg',
+                embeds: [
+                    {
+                        title: `New Member Spotlight: ${name}`,
+                        description: description,
+                        image: {
+                            url: imageUrl
+                        },
+                        color: 3447003
+                    }
+                ]
+            };
+
+            fetch(webhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Posted to Discord successfully!');
+                } else {
+                    console.error('Failed to post to Discord');
+                }
+            })
+            .catch(error => console.error('Error posting to Discord:', error));
+        }
+
+        function addSpotlight(name, description, imageUrl) {
+            const spotlights = JSON.parse(localStorage.getItem('spotlights')) || [];
+
+            const newSpotlight = { name, description, imageUrl };
+            spotlights.push(newSpotlight);
+
+            localStorage.setItem('spotlights', JSON.stringify(spotlights));
+            renderSpotlight(newSpotlight);
+        }
+
+        function loadSpotlights() {
+            const spotlights = JSON.parse(localStorage.getItem('spotlights')) || [];
+            spotlights.forEach(renderSpotlight);
+        }
+
+        function renderSpotlight(spotlight) {
+            const spotlightContainer = document.querySelector('.spotlight-container');
+            const spotlightDiv = document.createElement('div');
+            spotlightDiv.classList.add('spotlight');
+            spotlightDiv.innerHTML = `
+                <img src="${spotlight.imageUrl}" alt="${spotlight.name}">
+                <div class="spotlight-text">
+                    <h3>${spotlight.name}</h3>
+                    <p>${spotlight.description}</p>
+                </div>
+            `;
+            spotlightContainer.appendChild(spotlightDiv);
+        }
+    </script>
+</body>
+</html>
